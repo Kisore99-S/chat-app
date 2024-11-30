@@ -74,6 +74,7 @@ export const login = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
 export const logout = (req, res) => {
   try {
     res.cookie("jwt", "", {
@@ -83,6 +84,15 @@ export const logout = (req, res) => {
     return res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
     console.log(`Error in logout controller: ${error.message}`);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const checkAuth = (req, res) => {
+  try {
+    return res.status(200).json(req.user);
+  } catch (error) {
+    console.log(`Error in check auth controller: ${error.message}`);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
