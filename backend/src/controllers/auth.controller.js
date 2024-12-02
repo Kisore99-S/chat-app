@@ -30,11 +30,10 @@ export const signup = async (req, res) => {
         username,
       },
     });
-7
     if (newUser) {
       generateToken(newUser.id, res);
       return res.status(201).json({
-        _id: newUser.id,
+        id: newUser.id,
         email: newUser.email,
         username: newUser.username,
         avatarUrl: newUser.avatarUrl,
@@ -64,7 +63,7 @@ export const login = async (req, res) => {
     generateToken(user.id, res);
 
     return res.status(200).json({
-      _id: user.id,
+      id: user.id,
       email: user.email,
       username: user.username,
       avatarUrl: user.avatarUrl,
