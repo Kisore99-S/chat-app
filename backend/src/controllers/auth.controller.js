@@ -30,9 +30,9 @@ export const signup = async (req, res) => {
         username,
       },
     });
-
+7
     if (newUser) {
-      generateToken(newUser._id, res);
+      generateToken(newUser.id, res);
       return res.status(201).json({
         _id: newUser.id,
         email: newUser.email,
