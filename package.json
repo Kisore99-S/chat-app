@@ -4,7 +4,11 @@
   "main": "index.js",
   "scripts": {
     "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
-    "start": "npm run start --prefix backend"
+    "start": "npm run prisma:deploy --prefix backend && npm run start --prefix backend",
+    "prisma:generate": "npm run prisma:generate --prefix backend",
+    "prisma:deploy": "npm run prisma:generate --prefix backend && npm run prisma:push --prefix backend",
+    "prisma:push": "prisma db push --schema backend/prisma/schema.prisma",
+    "prisma:generate:backend": "prisma generate --schema backend/prisma/schema.prisma"
   },
   "keywords": [],
   "author": "",
