@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* For Webkit-based browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 6px; /* Reduce the width of the vertical scrollbar */
+  height: 6px; /* Reduce the height of the horizontal scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Scrollbar thumb color */
+  border-radius: 10px; /* Rounded corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Change color on hover */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Track background color */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin; /* Reduce the scrollbar width */
+  scrollbar-color: #888 transparent; /* Thumb and track colors */
+}
