@@ -16,7 +16,7 @@ function App() {
   }, []);
 
   return (
-    <div className="h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="h-screen bg-[#121212]">
       <Navbar />
       <Routes>
         <Route

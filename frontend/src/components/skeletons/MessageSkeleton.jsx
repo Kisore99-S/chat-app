@@ -14,11 +14,6 @@ const MessageSkeleton = () => {
               <div className="skeleton w-full h-full rounded-full" />
             </div>
           </div>
-
-          <div className="chat-header mb-1">
-            <div className="skeleton h-4 w-16" />
-          </div>
-
           <div className="chat-bubble bg-transparent p-0">
             <div className="skeleton h-16 w-[200px]" />
           </div>
