@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:deploy": "npm run prisma:generate && npm run prisma:push"
   },
   "author": "",
   "license": "ISC",
