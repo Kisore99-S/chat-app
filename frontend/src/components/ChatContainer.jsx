@@ -1,5 +1,5 @@
 import { useChatStore } from "../store/useChatStore";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
@@ -10,6 +10,7 @@ import {
   formatMessageTime,
   groupMessagesByDate,
 } from "../lib/utils";
+import TypingIndicator from "./TypingIndicator";
 
 const ChatContainer = () => {
   const {
@@ -20,7 +21,8 @@ const ChatContainer = () => {
     subscribeToMessages,
     unsubscribeToMessages,
   } = useChatStore();
-  const { authUser } = useAuthStore();
+  const { authUser, socket } = useAuthStore();
+  const [isTyping, setIsTyping] = useState(false);
   const messageEndRef = useRef(null);
 
   useEffect(() => {
@@ -34,6 +36,23 @@ const ChatContainer = () => {
     subscribeToMessages,
     unsubscribeToMessages,
   ]);
+
+  useEffect(() => {
+    socket.on("typing", ({ senderId }) => {
+      if (senderId === selectedUser.id) {
+        setIsTyping(true);
+      }
+    });
+    socket.on("stoppedTyping", ({ senderId }) => {
+      if (senderId === selectedUser.id) {
+        setIsTyping(false);
+      }
+    });
+
+    return () => {
+      socket.off("typing");
+    };
+  }, [selectedUser.id, socket]);
 
   useEffect(() => {
     if (messageEndRef.current && messages) {
@@ -116,7 +135,7 @@ const ChatContainer = () => {
           </div>
         ))}
       </div>
-
+      {isTyping && <TypingIndicator />}
       <MessageInput />
     </div>
   );
