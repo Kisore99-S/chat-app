@@ -20,7 +20,6 @@ export const formatDateLabel = (date) => {
 export const groupMessagesByDate = (messages) => {
   return messages.reduce((acc, message) => {
     const dateKey = format(new Date(message.createdAt), "yyyy-MM-dd");
-    console.log("date key", dateKey);
     if (!acc[dateKey]) acc[dateKey] = [];
     acc[dateKey].push(message);
 
