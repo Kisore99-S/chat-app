@@ -1,9 +1,9 @@
 import prisma from "../lib/prisma.js";
+import { io, getReceiverSocketId } from "../lib/socket.js";
 
 export const sendMessage = async (req, res) => {
   const { content } = req.body;
   const { id: receiverId } = req.params;
-  console.log("request user->", req.user);
   const senderId = req.user.id;
   try {
     const newMessage = await prisma.message.create({
@@ -13,6 +13,12 @@ export const sendMessage = async (req, res) => {
         receiverId,
       },
     });
+
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
+
     return res.status(201).json(newMessage);
   } catch (error) {
     console.log(`Error in send message controller: ${error.message}`);
