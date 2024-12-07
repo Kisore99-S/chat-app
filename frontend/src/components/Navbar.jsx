@@ -24,6 +24,7 @@ const Navbar = () => {
           <div className="flex items-center gap-2">
             {authUser && (
               <>
+                <span className="text-sm mr-2"> {authUser.username}</span>
                 <button className="flex gap-2 items-center" onClick={logout}>
                   <LogOut className="size-5" />
                   <span className="hidden sm:inline">Logout</span>
